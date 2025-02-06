@@ -13,3 +13,10 @@ Content-Type: application/json
 }
 
 ###
+
+POST {{SoftwareCatalog.Api_HostAddress}}/techs
+Content-Type: application/json
+
+{
+  //TechCreateModel
+}

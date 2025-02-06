@@ -1,0 +1,11 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+
+POST http://localhost:1337/techs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6IngwMDAwMCIsInN1YiI6IngwMDAwMCIsImp0aSI6Ijk4Y2I4NzQiLCJyb2xlIjpbIm1hbmFnZXIiLCJzb2Z0d2FyZS1jZW50ZXIiXSwiYXVkIjpbImh0dHA6Ly9sb2NhbGhvc3Q6NTQ4MTciLCJodHRwczovL2xvY2FsaG9zdDowIiwiaHR0cDovL2xvY2FsaG9zdDoxMzM3Il0sIm5iZiI6MTczODg3Nzg1MSwiZXhwIjoxNzQ2NTY3NDUxLCJpYXQiOjE3Mzg4Nzc4NTMsImlzcyI6ImRvdG5ldC11c2VyLWp3dHMifQ.5CdrJvVohIp7_sCWWBROiJeauhhQiD_WvRpNM3aKNiU
+Content-Type: application/json
+{
+    "name": "Danielle",
+    "Email": "danielle@progressive.com",
+    "phone": "0983"
+}

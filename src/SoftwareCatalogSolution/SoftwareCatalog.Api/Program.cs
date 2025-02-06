@@ -2,6 +2,7 @@ using FluentValidation;
 using Marten;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using SoftwareCatalog.Api.Catalog;
+using SoftwareCatalog.Api.Techs;
 using SoftwareCatalog.Api.Vendors;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IValidator<CatalogItemRequestModel>, CatalogItemRequestModelValidator>();
 
 builder.Services.AddVendors();
+builder.Services.AddTechs();
 builder.Services.AddSingleton<TimeProvider>((_) => TimeProvider.System);
 
 var connectionString = builder.Configuration.GetConnectionString("database")
@@ -43,13 +45,14 @@ if (app.Environment.IsDevelopment()) // ASPNETCORE_ENVIRONMENT=Development
     app.UseSwaggerUI(); // GET /swagger/index.html - an html web page that lets you visualize the spec for this api.
 }
 
-app.UseAuthentication();
-app.UseAuthorization();
+//app.UseAuthentication();
+//app.UseAuthorization();
 // Make Some Change
 app.MapControllers(); // this will scan your entire project for any controllers, use the attributes (HttpGet, etc.) to create
-// a "route table" - like a phone book. Reflection (the ability to have code look at itself)
+                      // a "route table" - like a phone book. Reflection (the ability to have code look at itself)
 
-  app.MapVendors();
+app.MapVendors();
+app.MapTechs();
 app.Run(); // a blocking infinite for loop.
 
 // I will explain this later if you:

@@ -28,10 +28,11 @@ public static class Extensions
     {
         var group = routes.MapGroup("vendors").WithTags("Approved Vendors").WithDescription("The Approved Vendors for the Company");
 
-        group.MapPost("/", AddingAVendor.CanAddVendorAsync).RequireAuthorization("canAddVendors");
+        //group.MapPost("/", AddingAVendor.CanAddVendorAsync).RequireAuthorization("canAddVendors");
+        group.MapPost("/", AddingAVendor.CanAddVendorAsync);
         group.MapGet("/{id}", GettingAVendor.GetVendorAsync).WithTags("Approved Vendors", "Catalog");
         group.MapGet("/", GettingAVendor.GetVendorsAsync);
         return group;
-       
+
     }
 }

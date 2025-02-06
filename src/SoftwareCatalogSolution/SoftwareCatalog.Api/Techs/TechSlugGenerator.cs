@@ -1,18 +1,19 @@
 ﻿
 using Marten;
 using Slugify;
+
+namespace SoftwareCatalog.Api.Techs;
 using SoftwareCatalog.Api.Shared.Catalog;
 
-namespace SoftwareCatalog.Api.Vendors;
 
-public class VendorSlugGenerator(ICheckForUniqueVendorSlugs uniqueSlugChecker)
+public class TechSlugGenerator(ICheckForUniqueTechSlugs uniqueSlugChecker)
 {
     private readonly SlugHelper _helper = new SlugHelper();
-    public async Task<string> GenerateSlugFor(string vendorName)
+    public async Task<string> GenerateSlugFor(string techName)
     {
 
 
-        var slug = _helper.GenerateSlug(vendorName);
+        var slug = _helper.GenerateSlug(techName);
 
         if (await uniqueSlugChecker.CheckUniqueSlug(slug))
         {
@@ -33,20 +34,20 @@ public class VendorSlugGenerator(ICheckForUniqueVendorSlugs uniqueSlugChecker)
     }
 }
 
-public interface ICheckForUniqueVendorSlugs
+public interface ICheckForUniqueTechSlugs
 {
     Task<bool> CheckUniqueSlug(string slug);
 }
 
-public class VendorDataService(IDocumentSession session) : ICheckForUniqueVendorSlugs, ICheckForVendorExistenceForCatalog
+public class TechDataService(IDocumentSession session) : ICheckForUniqueTechSlugs, ICheckForTechExistenceForCatalog
 {
     public async Task<bool> CheckUniqueSlug(string slug)
     {
-        return !await session.Query<VendorEntity>().AnyAsync(v => v.Slug == slug);
+        return !await session.Query<TechEntity>().AnyAsync(v => v.Slug == slug);
 
     }
 
-    async Task<bool> ICheckForVendorExistenceForCatalog.DoesVendorExistAsync(string slug)
+    async Task<bool> ICheckForTechExistenceForCatalog.DoesTechExistAsync(string slug)
     {
         return !await this.CheckUniqueSlug(slug);
     }
